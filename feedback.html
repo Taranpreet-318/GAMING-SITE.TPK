@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback - Gaming Zone</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      font-family:'Times New Roman', Times, serif;
+      color: rgb(238, 145, 192);
+      margin: 0;
+      padding: 0;
+    }
+
+     nav {
+      background-color: #de9ee2cc;
+      text-align: center;
+      padding: 30px;
+    }
+
+    nav a {
+      color: #1a0848;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size:30px;
+      text-decoration:wavy
+    }
+
+    nav a:hover {
+      color: rgb(7, 2, 45);
+    }
+
+    .feedback-container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: rgba(35, 17, 173, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .feedback-container h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ed8adb;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background-color: #f6d0f1f1;
+      color: #0b0117;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 10px;
+      font-size: 24px;
+    }
+
+    .stars input {
+      display: none;
+    }
+
+    .stars label {
+      cursor: pointer;
+      color: rgb(224, 205, 205);
+      transition: color 0.3s;
+    }
+
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: gold;
+    }
+
+    .submit-btn {
+      background-color: #e2add9;
+      color: #1a0219;
+      font-weight: bold;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #caeeea;
+    }
+  </style>
+</head>
+<body>
+
+     <nav>
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Signup</a>
+    <a href="games.html">Games</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+
+  <div class="feedback-container">
+    <h1>Feedback</h1>
+    <form action="#">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label>Rate your experience</label>
+      <div class="stars">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5">&#9733;</label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4">&#9733;</label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3">&#9733;</label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2">&#9733;</label>
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1">&#9733;</label>
+      </div>
+
+      <label for="message">Your Feedback</label>
+      <textarea id="message" placeholder="Tell us what you think..." required></textarea>
+
+      <button type="submit" class="submit-btn">Submit Feedback</button>
+    </form>
+  </div>
+</body>
+</html>

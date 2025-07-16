@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Games Gallery</title>
+  <style>
+    header {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #2e1056db, #00e0ff);
+      color: rgba(36, 7, 66, 0.903);
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    body {
+      background-color: #0d052af1;
+      color: rgb(238, 75, 200);
+      font-size: 30px;
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+      gap: 50px;
+      padding: 40px;
+      justify-items: center;
+    }
+
+    .game-card {
+      background-color: #de8fc9d2;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s, box-shadow 1.67s;
+      cursor: pointer;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .game-card img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      transition: 0.3s ease;
+      z-index: 1;
+    }
+
+    .preview-img {
+      opacity: 0;
+      pointer-events: none;
+      animation: none;
+      z-index: 2;
+    }
+
+    .game-card:hover .preview-img {
+      animation: flash 0.6s ease-in-out forwards;
+    }
+
+   
+
+    .game-card h3 {
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      padding: 8px;
+      font-size: 1em;
+      color: #070230;
+      backdrop-filter: blur(2px);
+      transition: 0.3s;
+    }
+
+    nav {
+      background-color: #e380d7cd;
+      text-align: center;
+      padding: 30px;
+    }
+
+    nav a {
+      color: #1a0848;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    nav a:hover {
+      color: rgb(7, 2, 45);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: #140432;
+      color: rgb(238, 119, 216);
+      border: none;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: rgb(51, 197, 197);
+    }
+
+    img.bg-img {
+      position: absolute;
+      left: 2px;
+      top: 0px;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal, .quiz-container {
+      display: none;
+      background: #07012f;
+      padding: 10px;
+      margin: 20px auto;
+      max-width: 400px;
+      border-radius: 40px;
+      box-shadow: 0 0 20px rgb(11, 7, 66);
+    }
+  </style>
+</head>
+<body>
+
+<header>GAMES GALLERY</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="login.html">Login</a>
+  <a href="signup.html">Signup</a>
+  <a href="games.html">Games</a>
+  <a href="feedback.html">Feedback</a>
+</nav>
+
+<div class="gallery">
+  
+  <div class="game-card" onclick="document.getElementById('rps').style.display='block'">
+       <img src="https://static.vecteezy.com/system/resources/previews/010/307/906/original/hands-playing-rock-paper-scissors-game-flat-design-style-illustration-vector.jpg" alt="Rock paper scissors ">
+       <h3>RPS</h3>
+  </div>
+
+  <div class="game-card" onclick="document.getElementById('quiz').style.display='block'">
+    <img src="data:image/webp;base64,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" alt="quiz ">
+     <h3>Tech Quiz</h3>
+  </div>
+
+    <a class="game-card" href="https://www.chess.com/">
+    <img src="https://th.bing.com/th/id/OIP.BoDJH1tfJh9E5OJ02yX_RAHaEh?w=298&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Chess">
+    <h3>Chess Master</h3>
+  </a>
+
+   <a class="game-card" href="https://poki.com/en/g/subway-surfers">
+    <img src="https://th.bing.com/th/id/OIP.9rxXFk9AjATEx3PFjlUPngHaHa?w=208&h=208&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Subway Surfers">
+    <h3>Subway Surfers</h3>
+  </a>
+
+   <a class="game-card" href="https://poki.com/en/g/temple-run-2">
+    <img src="https://th.bing.com/th/id/OIP.dAdiDKDnnPxNKsBHkxFDMgHaHa?w=208&h=208&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Temple Run">
+    <h3>Temple Run</h3>
+  </a>
+
+   <a class="game-card" href="https://www.minecraft.net/">
+    <img src="https://th.bing.com/th/id/OIP.Uxbi-AFcPg4y-NvlkchZFQHaEK?w=275&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Minecraft">
+     <h3>Minecraft</h3>
+  </a>
+
+ <a class="game-card" href="https://poki.com/en/g/rally-point-3?msockid=237b587439e46be631c8495a387f6a9f">
+    <img src="https://th.bing.com/th/id/OIP.njCtP5RZV9BMUo4DWcK_6gHaHa?w=167&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Rally Point 3">
+     <h3>Rally Point 3</h3>
+  </a>
+
+   <a class="game-card" href="https://www.angrybirds.com/play/">
+    <img src="https://th.bing.com/th/id/OIP.2I-ZSu8Ouiem5XTjbbG9uwHaHa?w=182&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Angry Birds">
+     <h3>Angry Birds</h3>
+  </a>
+
+   <a class="game-card" href="https://www.fortnite.com/">
+    <img src="https://th.bing.com/th/id/OIP.93CDzWPpk939D9wgPfRafwHaEK?w=324&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Fortnite">
+      <h3>Fortnite</h3>
+  </a>
+
+
+ <a class="game-card" href="https://apps.microsoft.com/detail/9NBLGGH18846?launch=true&mode=full&hl=en-us&gl=in&ocid=bingwebsearch">
+    <img src="https://th.bing.com/th/id/OIP.zQn7q9vmxL3vR38xMH6QgQHaFP?w=260&h=184&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Candy crush">
+       <h3>Candy Crush</h3>
+  </a>
+
+
+   <a class="game-card" href="https://8ballpool.com/game">
+    <img src="https://th.bing.com/th/id/OIP.Tav7NUHDVqlxg0IbJyQ6XwHaEK?w=321&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="8 ball pol">
+        <h3>8 Ball Pool</h3>
+  </a>
+
+
+   <a class="game-card" href="https://irts.in/">
+    <img src="https://th.bing.com/th/id/OIP.DE-Wxmpu179rTygjOFTtswHaEK?w=326&h=183&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="IRTS">
+     <h3>IRTS</h3>
+  </a>
+
+
+
+   <a class="game-card" href="https://poki.com/en/words?msockid=237b587439e46be631c8495a387f6a9f">
+    <img src="https://th.bing.com/th/id/OIP.J8Aa-6tO4ZC3G3EHWteGLgHaFU?w=208&h=150&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Word game">
+  <h3>Word Game</h3>
+  </a>
+
+
+   <a class="game-card" href="https://www.crazygames.com/t/mario">
+    <img src="https://th.bing.com/th/id/OIP.hcpemqJoF2jDXyueJITFewHaKt?w=126&h=183&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Super Mario">
+    
+    <h3>Super Mario</h3>
+  </a>
+
+
+   <a class="game-card" href="https://paperio.site/">
+    <img src="https://th.bing.com/th/id/OIP.ScDsSSZrqPNpcvP5JB7_DAHaEK?w=273&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Paperio.2">
+  
+    <h3>Paperio.2</h3>
+  </a>
+
+
+   <a class="game-card" href="https://www.rockstargames.com/gta-v">
+    <img src="https://th.bing.com/th/id/OIP.YYA1QSw8shFEvZFpR1QsEAHaEK?w=327&h=183&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Gta5">
+    
+    <h3>GTA 5</h3>
+  </a>
+
+
+</div>
+
+
+<div id="rps" class="modal">
+  <h2>Rock Paper Scissors</h2>
+  <button class="btn" onclick="playRPS('rock')"> Rock</button>
+  <button class="btn" onclick="playRPS('paper')"> Paper</button>
+  <button class="btn" onclick="playRPS('scissors')">Scissors</button>
+  <p id="rps-result" style="margin-top: 15px;"></p>
+</div>
+
+
+<div id="quiz" class="quiz-container">
+  <h2>Tech Quiz</h2>
+  <p id="question">What does CPU stand for?</p>
+  <button class="btn" onclick="checkAnswer('a')">A. Central Processing Unit</button>
+  <button class="btn" onclick="checkAnswer('b')">B. Computer Personal Unit</button>
+  <button class="btn" onclick="checkAnswer('c')">C. Control Panel Unit</button>
+  <p id="quiz-result" style="margin-top: 15px;"></p>
+</div>
+
+<script>
+  function playRPS(playerChoice) {
+    const choices = ['rock', 'paper', 'scissors'];
+    const computer = choices[Math.floor(Math.random() * 3)];
+    let result = '';
+    if (playerChoice === computer) result = "It's a draw!";
+    else if (
+      (playerChoice === 'rock' && computer === 'scissors') ||
+      (playerChoice === 'paper' && computer === 'rock') ||
+      (playerChoice === 'scissors' && computer === 'paper')
+    ) result = "You win!";
+    else result = "Computer wins!";
+    document.getElementById('rps-result').textContent = `You: ${playerChoice}, Computer: ${computer} → ${result}`;
+  }
+
+  function checkAnswer(option) {
+    const correct = 'a';
+    if (option === correct) {
+      document.getElementById('quiz-result').textContent = " Correct!";
+    } else {
+      document.getElementById('quiz-result').textContent = "Wrong! Try again.";
+    }
+  }
+</script>
+
+<img src="https://wallpaperbat.com/img/700353-pink-and-blue-gaming-wallpaper-top-free-pink-and-blue-gaming-background.jpg" class="bg-img">
+</body>
+</html>
